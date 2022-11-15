@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: black;
 }
 
 .App-logo {
@@ -27,6 +28,81 @@
 .App-link {
   color: #61dafb;
 }
+
+.zinvisible {
+  z-index: -10;
+}
+
+.zvisible {
+  z-index: 10;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.bigtext {  font-size: x-large;
+  font-weight: 500;
+}
+
+.round {
+  margin: 15px;
+  font-size: x-large;
+  border-radius: 80px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  }
+
+  .roundtiny {
+    margin: 3px;
+    
+    border-radius: 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 20px;
+    }
+
+.roundsmall {
+	margin: 3px;
+padding: 0.9%;
+
+
+
+  border-radius: 120px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+}
+
+.orangebutton{border-color: #e79e30;}
+
+#slicearray {
+  overflow: scroll;
+  position: relative;
+  scrollbar-base-color: #00b1f0 ;
+
+}
+
+.topmargin20 {
+  margin-top: 30px;
+}
+
+.roundbutton {
+	margin: 10px;
+
+
+
+
+  border-radius: 80px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
+::-webkit-scrollbar { width: 10px;}
+
+
+::-webkit-scrollbar-thumb {
+background-color:#e79e30;}
 
 @keyframes App-logo-spin {
   from {
