@@ -87,9 +87,18 @@ padding: 0.9%;
 .topmargin20 {
   margin-top: 30px;
 }
+.roundbutton1 {
+	margin: 5px;
 
+
+
+
+  border-radius: 80px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
 .roundbutton {
-	margin: 10px;
+	margin: 12px;
 
 
 

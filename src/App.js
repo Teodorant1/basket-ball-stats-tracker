@@ -3,7 +3,7 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 import axios, { Axios } from "axios";
-import { FaPlus, FaTrashAlt } from "react-icons/fa";
+import { FaArrowDown, FaPlus, FaTrashAlt } from "react-icons/fa";
 
 function App() {
   const [teamindex, setteamindex] = useState(0);
@@ -1298,17 +1298,134 @@ function App() {
       teamname: "Openjobmetis Varese",
     },
   ]);
-
   const [team, setteam] = useState(bothteams.at(0));
-
   const [quadrant, setquadrant] = useState(team.quadrant1);
-  const [dropdownVisibility, setdropdownVisibility] = useState("invisible");
+
+  const [show, setshow] = useState(-10);
+  const [xaxis, setxaxis] = useState(0);
+  const [yaxis, setyaxis] = useState(0);
+
+  function LeftClickDropdown() {
+    return (
+      <div
+        class={show}
+        style={{
+          borderColor: "black",
+          borderRadius: 20,
+          backgroundColor: "#e79e30",
+          position: "absolute",
+          top: yaxis,
+          left: xaxis,
+          zIndex: show,
+        }}
+      >
+        <div>
+          {" "}
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(1);
+              setquadrantindex(1);
+              setshow(-10);
+            }}
+          >
+            Q1
+          </button>
+        </div>
+        <div>
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(2);
+              setquadrantindex(2);
+              setshow(-10);
+            }}
+          >
+            Q2
+          </button>
+        </div>
+        <div>
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(3);
+              setquadrantindex(3);
+              setshow(-10);
+            }}
+          >
+            Q3
+          </button>
+        </div>
+        <div>
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(4);
+              setquadrantindex(4);
+              setshow(-10);
+            }}
+          >
+            Q4
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function toggleQuadrants() {
+    if (show === -10) {
+      setshow(10);
+    } else {
+      setshow(-10);
+    }
+  }
 
   function ImprovizedDropDown() {
     return (
       <div>
         {" "}
-        <button> {quadrantindex} </button>{" "}
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            toggleQuadrants();
+            setyaxis(event.pageY + 20);
+            setxaxis(event.pageX - 40);
+          }}
+          style={{
+            backgroundColor: "#9dd045",
+            color: "white",
+            height: "45px",
+            width: "125px",
+          }}
+          class="roundbutton"
+        >
+          {" "}
+          {quadrantindex}. Quarter <FaArrowDown />{" "}
+        </button>{" "}
       </div>
     );
   }
@@ -1407,7 +1524,8 @@ function App() {
 
     return (
       <div>
-        <SearchBar />{" "}
+        <SearchBar /> <div class="bigtext"> Your Combination </div>
+        <div class="bigtext"> | Based on 5 players | </div>
         <div class="round" style={{ backgroundColor: "#00ff99" }}>
           {" "}
           Average PPM: {getaverageratio(slice)} | Teamscore:
@@ -1430,6 +1548,7 @@ function App() {
     const slicearraybox = slicearray.map((array) => (
       <div style={{ width: 1000 }} key={array.id}>
         {""}
+        <div class="bigtext"> Player Combination </div>
 
         <div class="flex-container">
           {" "}
@@ -1514,75 +1633,10 @@ function App() {
             </button>{" "}
           </div>
 
-          <div> Quadrant: {quadrantindex} </div>
           <div>
             {" "}
-            <button
-              class="roundbutton"
-              style={{
-                backgroundColor: "#9dd045",
-                color: "white",
-                height: "45px",
-                width: "125px",
-              }}
-              onClick={() => {
-                changeQuadrant(1);
-                setquadrantindex(1);
-              }}
-            >
-              Q1
-            </button>
-          </div>
-          <div>
-            <button
-              class="roundbutton"
-              style={{
-                backgroundColor: "#9dd045",
-                color: "white",
-                height: "45px",
-                width: "125px",
-              }}
-              onClick={() => {
-                changeQuadrant(2);
-                setquadrantindex(2);
-              }}
-            >
-              Q2
-            </button>
-          </div>
-          <div>
-            <button
-              class="roundbutton"
-              style={{
-                backgroundColor: "#9dd045",
-                color: "white",
-                height: "45px",
-                width: "125px",
-              }}
-              onClick={() => {
-                changeQuadrant(3);
-                setquadrantindex(3);
-              }}
-            >
-              Q3
-            </button>
-          </div>
-          <div>
-            <button
-              class="roundbutton"
-              style={{
-                backgroundColor: "#9dd045",
-                color: "white",
-                height: "45px",
-                width: "125px",
-              }}
-              onClick={() => {
-                changeQuadrant(4);
-                setquadrantindex(4);
-              }}
-            >
-              Q4
-            </button>
+            <ImprovizedDropDown />
+            <LeftClickDropdown />
           </div>
         </div>{" "}
         <div id="slicearray" style={{ height: window.innerHeight }}>
@@ -1598,7 +1652,7 @@ function App() {
     const parcela1 = "{id:" + messagetosend + "}";
 
     axios
-      .post("http://localhost:8001", parcela1)
+      .post("http://80.240.28.176:8001", parcela1)
       .then((resp) => {
         const receivedinfo = resp.data;
         setbothteams(receivedinfo);
