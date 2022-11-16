@@ -1652,7 +1652,7 @@ function App() {
     const parcela1 = "{id:" + messagetosend + "}";
 
     axios
-      .post("http://167.179.86.23:8001", parcela1)
+      .post("http://80.240.21.17:8001", parcela1)
       .then((resp) => {
         const receivedinfo = resp.data;
         setbothteams(receivedinfo);
