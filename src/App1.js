@@ -104,7 +104,7 @@ function App() {
       "}";
 
     axios
-      .post("http://localhost:8002", fetchpayload)
+      .post("http://80.240.21.17:8002", fetchpayload)
       .then((resp) => {
         const receivedinfo = resp.data;
         setquadrant(receivedinfo);
