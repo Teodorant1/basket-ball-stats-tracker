@@ -3,6 +3,10 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 import axios, { Axios } from "axios";
+import { ReactComponent as Crossedarrows } from "./icons/🦆 icon _random_.svg";
+import { ReactComponent as Basketball } from "./icons/Vector.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { FaArrowDown, FaPlus, FaTrashAlt } from "react-icons/fa";
 
 function App() {
@@ -1319,7 +1323,7 @@ function App() {
           zIndex: show,
         }}
       >
-        <div>
+        <div class="flex-container">
           {" "}
           <button
             class="roundbutton1"
@@ -1337,8 +1341,40 @@ function App() {
           >
             Q1
           </button>
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(1);
+              setquadrantindex(1);
+              setshow(-10);
+            }}
+          >
+            Q1
+          </button>
         </div>
-        <div>
+        <div class="flex-container">
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(2);
+              setquadrantindex(2);
+              setshow(-10);
+            }}
+          >
+            Q2
+          </button>
           <button
             class="roundbutton1"
             style={{
@@ -1356,7 +1392,23 @@ function App() {
             Q2
           </button>
         </div>
-        <div>
+        <div class="flex-container">
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(3);
+              setquadrantindex(3);
+              setshow(-10);
+            }}
+          >
+            Q3
+          </button>{" "}
           <button
             class="roundbutton1"
             style={{
@@ -1374,7 +1426,23 @@ function App() {
             Q3
           </button>
         </div>
-        <div>
+        <div class="flex-container">
+          <button
+            class="roundbutton1"
+            style={{
+              backgroundColor: "#9dd045",
+              color: "white",
+              height: "45px",
+              width: "125px",
+            }}
+            onClick={() => {
+              changeQuadrant(4);
+              setquadrantindex(4);
+              setshow(-10);
+            }}
+          >
+            Q4
+          </button>{" "}
           <button
             class="roundbutton1"
             style={{
@@ -1412,8 +1480,8 @@ function App() {
           onClick={(event) => {
             event.preventDefault();
             toggleQuadrants();
-            setyaxis(event.pageY + 20);
-            setxaxis(event.pageX - 40);
+            setyaxis(event.pageY - 160);
+            setxaxis(event.pageX - 35);
           }}
           style={{
             backgroundColor: "#9dd045",
@@ -1434,7 +1502,9 @@ function App() {
     const newplayer1 = { name: player.name, points: player.points, time: time };
 
     const comparisonarray0 = comparisonarray;
-    const slice0 = comparisonarray0.subtimeline.slice;
+
+    const slice0 = comparisonarray0.subtimeline.slice.slice();
+
     slice0.push(newplayer1);
 
     const newcomparisonarray = {
@@ -1504,14 +1574,11 @@ function App() {
     const slicebox = slice.map((player) => (
       <div
         class="roundtiny"
-        style={{ backgroundColor: "#cccccc", height: 100, width: 150 }}
+        style={{ backgroundColor: "#cccccc", height: 150, width: 150 }}
         key={player.name}
       >
-        <div>{player.name}</div>
-        <div> Points {player.points}</div>
-        PPM : {player.points / props.subtimeline.time}
         <button
-          class="roundbutton"
+          class="roundbutton rightbutton orangebutton"
           onClick={() => {
             removeplayer(player);
           }}
@@ -1519,26 +1586,43 @@ function App() {
           {" "}
           <FaTrashAlt />{" "}
         </button>
+        <div class="playerbox floatleft ">
+          <div class="scaledbasketball floatleft ">{<Basketball />}</div>
+          {player.name}
+        </div>
+        <div class="floatleft "> | Points {player.points} |</div>
+        <div class="floatleft ">
+          {" "}
+          | PPM : {player.points / props.subtimeline.time} |
+        </div>
       </div>
     ));
 
     return (
-      <div>
+      <div class="greybox rightdiv">
         <SearchBar /> <div class="bigtext"> Your Combination </div>
-        <div class="bigtext"> | Based on 5 players | </div>
-        <div class="round" style={{ backgroundColor: "#00ff99" }}>
-          {" "}
-          Average PPM: {getaverageratio(slice)} | Teamscore:
-          {props.subtimeline.score} | Time: {props.subtimeline.time} | PPM:{" "}
-          {props.subtimeline.score / props.subtimeline.time} |
-          <div>
+        <div>
+          <div class="flex-container">{slicebox}</div>
+          <div
+            class="p-30 mb-20 bg-warning text-dark"
+            style={{ width: 800, height: 4 }}
+          >
             {" "}
-            | Period:
-            {props.id} | Projected Points:
-            {getaverageratio(slice) * props.subtimeline.time} |{" "}
+            <div class="bigtext"> | Based on 5 players | </div>
+            <div class="round" style={{ backgroundColor: "#00ff99" }}>
+              {" "}
+              Average PPM: {getaverageratio(slice)} | Teamscore:
+              {props.subtimeline.score} | Time: {props.subtimeline.time} | PPM:{" "}
+              {props.subtimeline.score / props.subtimeline.time} |
+              <div>
+                {" "}
+                | Period:
+                {props.id} | Projected Points:
+                {getaverageratio(slice) * props.subtimeline.time} |{" "}
+              </div>
+            </div>{" "}
           </div>
         </div>
-        <div class="flex-container">{slicebox}</div>
       </div>
     );
   }
@@ -1546,9 +1630,8 @@ function App() {
   function SliceArray({ props1 }) {
     const slicearray = props1;
     const slicearraybox = slicearray.map((array) => (
-      <div style={{ width: 1000 }} key={array.id}>
+      <div style={{ width: 1040 }} key={array.id}>
         {""}
-        <div class="bigtext"> Player Combination </div>
 
         <div class="flex-container">
           {" "}
@@ -1556,21 +1639,31 @@ function App() {
             return (
               <div
                 class="roundsmall "
-                style={{ backgroundColor: "#cccccc" }}
+                style={{ backgroundColor: "#cccccc", width: 400 }}
                 key={player.name}
               >
-                Name: {player.name} Score: {player.points} | PPM :{" "}
-                {player.points / array.subtimeline.time}
-                <button
-                  style={{ backgroundColor: "#cccccc" }}
-                  class="roundbutton orangebutton"
-                  onClick={() => {
-                    addplayer(player, array.subtimeline.time);
-                  }}
-                >
+                {" "}
+                <div class="rightbutton">
                   {" "}
-                  <FaPlus />{" "}
-                </button>
+                  <button
+                    style={{ backgroundColor: "#cccccc" }}
+                    class="roundbutton orangebutton"
+                    onClick={() => {
+                      addplayer(player, array.subtimeline.time);
+                    }}
+                  >
+                    {" "}
+                    <FaPlus />{" "}
+                  </button>{" "}
+                </div>
+                <div class="playerbox">
+                  <div class="scaledbasketball">{<Basketball />}</div>
+                  Name: {player.name}
+                </div>
+                <div class="floatleft"> | Score : {player.points} |</div>
+                <div class="floatleft">
+                  | PPM : {player.points / array.subtimeline.time}|
+                </div>
               </div>
             );
           })}
@@ -1578,10 +1671,10 @@ function App() {
         <div class="flex-container">
           {" "}
           <div>
+            <div class="bigtext"> | Team Performance | </div>{" "}
             <div class="bigtext topmargin20">| Based on 5 players |</div>{" "}
           </div>
           <div style={{ backgroundColor: "#00FFFF" }} class="round">
-            <div class="bigtext"> | Team Performance: | </div>
             <div> | Period: {array.id} | </div> Time: {array.subtimeline.time}{" "}
             minutes | points: {array.subtimeline.score} | Ratio:{"   "}
             {array.subtimeline.score / array.subtimeline.time} PPM
@@ -1597,11 +1690,19 @@ function App() {
             </button>
           </div>{" "}
         </div>
+
+        <div
+          class="p-30 mb-20 bg-warning text-dark"
+          style={{ width: 1040, height: 4 }}
+        >
+          {" "}
+        </div>
       </div>
     ));
     return (
-      <div>
-        <div class="bigtext"> Teamname: {team.teamname} </div>
+      <div class="slicedarray">
+        <div class="superlargetext1"> Team Name: {team.teamname} </div>
+        <div class="superlargetext1"> Player Combination </div>
         <div class="flex-container">
           <div>
             {" "}
@@ -1610,8 +1711,8 @@ function App() {
               style={{
                 backgroundColor: "#9dd045",
                 color: "white",
-                height: "45px",
-                width: "125px",
+                height: "65px",
+                width: "185px",
               }}
               onClick={() => {
                 if (teamindex === 0) {
@@ -1639,7 +1740,11 @@ function App() {
             <LeftClickDropdown />
           </div>
         </div>{" "}
-        <div id="slicearray" style={{ height: window.innerHeight }}>
+        <div
+          class="greybox"
+          id="slicearray"
+          style={{ height: window.innerHeight }}
+        >
           {" "}
           {slicearraybox}{" "}
         </div>{" "}
@@ -1680,8 +1785,8 @@ function App() {
           style={{
             backgroundColor: "#9dd045",
             color: "white",
-            height: "45px",
-            width: "125px",
+            height: "65px",
+            width: "185px",
           }}
           onClick={() => {
             getMatchInfo();
@@ -1717,6 +1822,36 @@ function App() {
     );
   }
 
+  function ZIEARROWS() {
+    return (
+      <div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>{" "}
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        <div style={{ visibility: "hidden" }}> Paloki </div>
+        {<Crossedarrows />}{" "}
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -1726,10 +1861,16 @@ function App() {
       }}
       className="App"
     >
-      <div style={{ backgroundColor: "#e6e6e6" }} class="flex-container">
+      {" "}
+      <div class="superlargetext0">Basketball Stats</div>{" "}
+      <div style={{ height: 140 }}>
+        {" "}
+        <div class="scaledbasketball1">{<Basketball />}</div>{" "}
+      </div>
+      <div style={{ backgroundColor: "#e6e6e6" }} class="flex-container ">
         {" "}
         <ShowTeamsBreakdown />
-        <ComparisonSlice props={comparisonarray} />
+        <ZIEARROWS /> <ComparisonSlice props={comparisonarray} />
       </div>
     </div>
   );

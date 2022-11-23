@@ -44,9 +44,100 @@
   height: 100%;
 }
 
+.superlargetext1 {
+font-size: 135%;
+font-weight: 550;
+left: 1cm;}
+
+.slicedarray {
+  position: relative;
+  top: 50px;
+}
+
+#logo {
+  position: relative;
+  top: 1cm;
+  left: 1cm;
+}
+
+.scaledbasketball {
+width: 25px;
+height: 25px;
+margin: 0 10px 0 0;
+}
+
+
+.rightdiv {
+  position: relative;
+  top: 4.7cm;
+}
+
+.playerbox {
+  display: flex;
+  justify-content: center;
+  margin: 0 10px 0 0;
+
+}
+
+.rightbutton {
+  float: right;
+}
+
+.rightmenu {
+  
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 65%;
+  height: 50px;
+}
+
+.quadrantpicker {
+justify-items: left;}
+
+.floatleft {
+  text-align: left;
+}
+
+.scaledbasketball1 {
+  position:absolute;
+  left: 70px;
+  width: 125px;
+  height: 125px;
+  }
+
+  .superlargetext0 { 
+    position: absolute;
+    font-size: 180%;
+   font-weight: 550;
+   padding-top: 1cm;
+   padding-left: 6cm;
+ }
+
+.superlargetext { 
+   font-size: 250%;
+  font-weight: 550;
+  padding-top: 1cm;
+  padding-bottom: 1cm;
+  padding-left: 1cm;
+}
+
+.greybox {
+  border-style: solid;
+  border-color: lightgray;
+}
+
 .bigtext {  font-size: x-large;
   font-weight: 500;
 }
+
+#ball {
+  position: absolute;
+  top: 1cm;
+  left: 15cm;
+  width: 75px;
+}
+
 
 .round {
   margin: 15px;
@@ -75,13 +166,16 @@ padding: 0.9%;
 	-moz-border-radius: 15px;
 }
 
-.orangebutton{border-color: #e79e30;}
+.orangebutton{
+
+
+border-color: #e79e30;
+}
 
 #slicearray {
   overflow: scroll;
   position: relative;
-  scrollbar-base-color: #00b1f0 ;
-
+  border-color: lightgray;
 }
 
 .topmargin20 {
