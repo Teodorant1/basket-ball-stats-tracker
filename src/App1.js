@@ -412,7 +412,7 @@ function App({ user1, password1 }) {
           <div class="flex-container">{slicebox}</div>
           <div
             class="p-30 mb-20 bg-warning text-dark"
-            style={{ width: 800, height: 4 }}
+            style={{ width: 800, height: 5 }}
           >
             {" "}
             <div class="bigtext"> | Based on 5 players | </div>
