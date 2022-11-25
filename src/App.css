@@ -88,8 +88,8 @@ margin: 0 10px 0 0;
   position: absolute;
   top: 0%;
   right: 0%;
-  width: 65%;
-  height: 50px;
+  width: 75%;
+  height: 60px;
 }
 
 .quadrantpicker {
@@ -98,6 +98,27 @@ justify-items: left;}
 .floatleft {
   text-align: left;
 }
+
+.logincredentials 
+{
+position: absolute;
+left: 45%;
+top: 30%;
+}
+
+.logintitle {
+   position:absolute;
+  top: 120px;
+  left: 25%;
+  font-size: 300%;}
+
+
+.scaledbasketball4 {
+  position:absolute;
+  left: 70px;
+  width: 425px;
+  height: 425px;
+  }
 
 .scaledbasketball1 {
   position:absolute;

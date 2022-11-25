@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios, { Axios } from "axios";
 import { ReactComponent as Crossedarrows } from "./icons/🦆 icon _random_.svg";
 import { ReactComponent as Basketball } from "./icons/Vector.svg";
@@ -9,7 +9,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { FaArrowDown, FaPlus, FaTrashAlt } from "react-icons/fa";
 
-function App() {
+function App({ user1, password1 }) {
+  const [username, setuser] = useState(user1);
+  const [password, setpassword] = useState(password1);
   const [quadrant, setquadrant] = useState({
     quadrantnumber: 1,
     timeline: [
@@ -95,8 +97,11 @@ function App() {
 
   function getRefactoredQuadrants(QuarterNumber, teamID) {
     const fetchpayload =
-      "{ gameID:" +
-      gameID +
+      "{ method:getslice" +
+      ",username:" +
+      username +
+      ",password:" +
+      password +
       ", teamID:" +
       teamID +
       ", QuarterNumber:" +
@@ -104,7 +109,7 @@ function App() {
       "}";
 
     axios
-      .post("http://80.240.21.17:8002", fetchpayload)
+      .post("http://localhost:8002", fetchpayload)
       .then((resp) => {
         const receivedinfo = resp.data;
         setquadrant(receivedinfo);
@@ -324,16 +329,14 @@ function App() {
     setcomparisonarray(newcomparisonarray);
   }
 
-  function getaverageratio(props) {
+  function getLineupPoints(props) {
     const props1 = props;
-    var sumratios = props1.reduce(
+    var sum = props1.reduce(
       (total, currentvalue) => total + currentvalue.points,
       0
     );
 
-    var avgratio = sumratios / 5;
-
-    return avgratio;
+    return sum;
   }
 
   const [comparisonarray, setcomparisonarray] = useState({
@@ -398,15 +401,12 @@ function App() {
           {player.name}
         </div>
         <div class="floatleft "> | Points {player.points} |</div>
-        <div class="floatleft ">
-          {" "}
-          | PPM : {player.points / props.subtimeline.time} |
-        </div>
       </div>
     ));
 
     return (
       <div class="greybox rightdiv" style={{ height: window.outerHeight }}>
+        <SearchBar />
         <div class="bigtext"> Your Combination </div>
         <div>
           <div class="flex-container">{slicebox}</div>
@@ -417,16 +417,10 @@ function App() {
             {" "}
             <div class="bigtext"> | Based on 5 players | </div>
             <div class="round" style={{ backgroundColor: "#00ff99" }}>
-              {" "}
-              Average PPM: {getaverageratio(slice)} | Teamscore:
-              {props.subtimeline.score} | Time: {props.subtimeline.time} | PPM:{" "}
-              {props.subtimeline.score / props.subtimeline.time} |
-              <div>
-                {" "}
-                | Period:
-                {props.id} | Projected Points:
-                {getaverageratio(slice) * props.subtimeline.time} |{" "}
-              </div>
+              Lineup Score:
+              {getLineupPoints(comparisonarray.subtimeline.slice)}| Time:{" "}
+              {props.subtimeline.time}
+              <div> | Lineup: {props.id} |</div>
             </div>{" "}
           </div>
         </div>
@@ -468,9 +462,7 @@ function App() {
                   Name: {player.name}
                 </div>
                 <div class="floatleft"> | Score : {player.points} |</div>
-                <div class="floatleft">
-                  | PPM : {player.points / array.subtimeline.time}|
-                </div>
+                <div class="floatleft"></div>
               </div>
             );
           })}
@@ -482,9 +474,8 @@ function App() {
             <div class="bigtext topmargin20">| Based on 5 players |</div>{" "}
           </div>
           <div style={{ backgroundColor: "#00FFFF" }} class="round">
-            <div> | Period: {array.id} | </div> Time: {array.subtimeline.time}{" "}
-            minutes | points: {array.subtimeline.score} | Ratio:{"   "}
-            {array.subtimeline.score / array.subtimeline.time} PPM
+            <div> | Lineup: {array.id} | </div> Time: {array.subtimeline.time}{" "}
+            minutes | points: {array.subtimeline.score} |
             <button
               style={{ backgroundColor: "#cccccc" }}
               class="roundbutton orangebutton"
@@ -509,7 +500,7 @@ function App() {
     return (
       <div class="slicedarray">
         <div></div>
-        <ConditionalElement />
+        <QuadrantPicker />
         <div
           class="greybox"
           id="slicearray"
@@ -546,6 +537,30 @@ function App() {
     );
   }
 
+  function changegameID() {
+    const temp_gameID = document.getElementById("gameidnumber").value;
+    const parcela1 =
+      "{username:" +
+      username +
+      ",password:" +
+      password +
+      ",gameID:" +
+      temp_gameID +
+      "}";
+
+    axios
+      .post("http://localhost:8004", parcela1)
+      .then((resp) => {
+        const receivedinfo = resp.data;
+        console.log(receivedinfo);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  useEffect(() => {
+    getRefactoredQuadrants(1, 1);
+  }, []);
+
   function SearchBar() {
     return (
       <div>
@@ -553,7 +568,7 @@ function App() {
         <input
           type="text"
           className="form-control"
-          id="messagetext"
+          id="gameidnumber"
           placeholder="Your Search Target Goes Here"
         />
         <button
@@ -565,9 +580,8 @@ function App() {
             width: "185px",
           }}
           onClick={() => {
-            //  const temp_gameID = document.getElementById("messagetext").value;
-            setgameID(document.getElementById("messagetext").value);
-            console.log(document.getElementById("messagetext").value);
+            changegameID();
+
             setstage(1);
           }}
         >
@@ -626,10 +640,6 @@ function App() {
       className="App"
     >
       {" "}
-      <div class="p-3 mb-2 bg-warning text-dark rightmenu">
-        {" "}
-        <RightMenu />{" "}
-      </div>{" "}
       <div class="superlargetext0">Basketball Stats</div>{" "}
       <div style={{ height: 140 }}>
         {" "}
