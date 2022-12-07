@@ -13,80 +13,115 @@ function App({ user1, password1 }) {
   const [username, setuser] = useState(user1);
   const [password, setpassword] = useState(password1);
   const [quadrant, setquadrant] = useState({
-    quadrantnumber: 1,
+    quadrantnumber: 2,
     timeline: [
       {
         subtimeline: {
-          score: 10,
+          score: 5,
           slice: [
-            { name: "Derek Willis", points: 0 },
-            { name: "Allerik Freeman", points: 0 },
-            { name: "Mitchell Watt", points: 6 },
-            { name: "Jayson Granger", points: 0 },
-            { name: "Jordan Parks", points: 4 },
+            { name: "David Michineau", points: 0 },
+            { name: "Jordan Howard", points: 0 },
+            { name: "JaCorey Williams", points: 0 },
+            { name: "Elijah Stewart", points: 0 },
+            { name: "Emmitt Williams", points: 0 },
           ],
-          time: 5,
+          enemyscore: 5,
+          time: 2,
         },
         id: 1,
       },
       {
         subtimeline: {
-          score: 2,
+          score: 4,
           slice: [
-            { name: "Michael Bramos", points: 0 },
-            { name: "Allerik Freeman", points: 2 },
-            { name: "Mitchell Watt", points: 0 },
-            { name: "Jayson Granger", points: 0 },
-            { name: "Jeff Brooks", points: 0 },
+            { name: "Simone Zanotti", points: 0 },
+            { name: "David Michineau", points: 0 },
+            { name: "Jordan Howard", points: 0 },
+            { name: "JaCorey Williams", points: 0 },
+            { name: "Elijah Stewart", points: 0 },
           ],
+          enemyscore: 4,
           time: 1,
         },
         id: 2,
       },
       {
         subtimeline: {
-          score: 0,
+          score: 4,
           slice: [
-            { name: "Michael Bramos", points: 0 },
-            { name: "Marco Spissu", points: 0 },
-            { name: "Allerik Freeman", points: 0 },
-            { name: "Amedeo Tessitori", points: 0 },
-            { name: "Jeff Brooks", points: 0 },
+            { name: "Simone Zanotti", points: 0 },
+            { name: "David Michineau", points: 0 },
+            { name: "JaCorey Williams", points: 1 },
+            { name: "Elijah Stewart", points: 3 },
+            { name: "Robert Johnson", points: 0 },
           ],
+          enemyscore: 0,
           time: 1,
         },
         id: 3,
       },
       {
         subtimeline: {
-          score: 2,
+          score: 4,
           slice: [
-            { name: "Michael Bramos", points: 0 },
-            { name: "Marco Spissu", points: 0 },
-            { name: "Riccardo Moraschini", points: 2 },
-            { name: "Amedeo Tessitori", points: 0 },
-            { name: "Jeff Brooks", points: 0 },
+            { name: "Simone Zanotti", points: 0 },
+            { name: "David Michineau", points: 0 },
+            { name: "Elijah Stewart", points: 0 },
+            { name: "Emmitt Williams", points: 0 },
+            { name: "Robert Johnson", points: 0 },
           ],
-          time: 2,
+          enemyscore: 4,
+          time: 1,
         },
         id: 4,
       },
       {
         subtimeline: {
-          score: 1,
+          score: 10,
           slice: [
-            { name: "Marco Spissu", points: 0 },
-            { name: "Riccardo Moraschini", points: 1 },
-            { name: "Matteo Chillo", points: 0 },
-            { name: "Jeff Brooks", points: 0 },
-            { name: "Jordan Parks", points: 0 },
+            { name: "Simone Zanotti", points: 1 },
+            { name: "Nicolò Dellosto", points: 0 },
+            { name: "David Michineau", points: 4 },
+            { name: "Elijah Stewart", points: 0 },
+            { name: "Robert Johnson", points: 0 },
           ],
+          enemyscore: 5,
           time: 1,
         },
         id: 5,
       },
+      {
+        subtimeline: {
+          score: 3,
+          slice: [
+            { name: "Simone Zanotti", points: 1 },
+            { name: "Lorenzo Uglietti", points: 0 },
+            { name: "David Michineau", points: 0 },
+            { name: "Jordan Howard", points: 2 },
+            { name: "Elijah Stewart", points: 0 },
+          ],
+          enemyscore: 0,
+          time: 1,
+        },
+        id: 6,
+      },
+      {
+        subtimeline: {
+          score: 4,
+          slice: [
+            { name: "Lorenzo Uglietti", points: 0 },
+            { name: "David Michineau", points: 0 },
+            { name: "Andrea Zerini", points: 0 },
+            { name: "Jordan Howard", points: 0 },
+            { name: "Elijah Stewart", points: 4 },
+          ],
+          enemyscore: 0,
+          time: 1,
+        },
+        id: 7,
+      },
     ],
-    teamname: "Umana Reyer Venezia",
+    teamname: "GeVi Napoli Basket",
   });
   const [stage, setstage] = useState(0);
 
@@ -109,7 +144,7 @@ function App({ user1, password1 }) {
       "}";
 
     axios
-      .post("http://localhost:8002", fetchpayload)
+      .post("http://80.240.21.17:8002", fetchpayload)
       .then((resp) => {
         const receivedinfo = resp.data;
         setquadrant(receivedinfo);
@@ -282,7 +317,7 @@ function App({ user1, password1 }) {
             height: "65px",
             width: "155px",
           }}
-          class="roundbutton "
+          class="roundbutton"
         >
           {" "}
           Pick Quadrant <FaArrowDown />{" "}
@@ -353,24 +388,6 @@ function App({ user1, password1 }) {
     },
     id: 85,
   });
-
-  function RightMenu() {
-    return (
-      <div class="rightmenu ">
-        {" "}
-        <button>Blog Posts</button>
-        <button>Game BreakDown</button>
-        <button>About us</button>
-        <button>Contact us</button>
-        <button>News</button>
-        <button>Subscriptions</button>
-        <button>Options</button>
-        <button>FAQ</button>
-        <button>My account</button>
-        <button>Log out</button>
-      </div>
-    );
-  }
 
   // Slice
   // Player1 Player2 Player3 Player4 Player5
@@ -475,7 +492,8 @@ function App({ user1, password1 }) {
           </div>
           <div style={{ backgroundColor: "#00FFFF" }} class="round">
             <div> | Lineup: {array.id} | </div> Time: {array.subtimeline.time}{" "}
-            minutes | points: {array.subtimeline.score} |
+            minutes | points: {array.subtimeline.score} | Enemy Points:{" "}
+            {array.subtimeline.enemyscore}
             <button
               style={{ backgroundColor: "#cccccc" }}
               class="roundbutton orangebutton"
@@ -549,7 +567,7 @@ function App({ user1, password1 }) {
       "}";
 
     axios
-      .post("http://localhost:8004", parcela1)
+      .post("http://80.240.21.17:8004", parcela1)
       .then((resp) => {
         const receivedinfo = resp.data;
         console.log(receivedinfo);
@@ -640,11 +658,6 @@ function App({ user1, password1 }) {
       className="App"
     >
       {" "}
-      <div class="superlargetext0">Basketball Stats</div>{" "}
-      <div style={{ height: 140 }}>
-        {" "}
-        <div class="scaledbasketball1">{<Basketball />}</div>{" "}
-      </div>
       <div style={{ backgroundColor: "#e6e6e6" }} class="flex-container ">
         {" "}
         <ShowTeamsBreakdown />

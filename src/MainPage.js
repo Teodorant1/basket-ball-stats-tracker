@@ -5,6 +5,8 @@ import axios, { Axios } from "axios";
 
 import ReactDOM from "react-dom/client";
 import App from "./App1";
+import AccountManager1 from "./AccountManager";
+import YearlyReporter1 from "./YearlyReporter";
 import "./App.css";
 
 function MainPage() {
@@ -22,7 +24,7 @@ function MainPage() {
     const parcela1 = "{username:" + username1 + ",password:" + password1 + "}";
 
     axios
-      .post("http://localhost:8003", parcela1)
+      .post("http://80.240.21.17:8003", parcela1)
       .then((resp) => {
         const receivedinfo = resp.data;
         setpage(receivedinfo);
@@ -68,7 +70,6 @@ function MainPage() {
     }
     return (
       <div>
-        <div class="scaledbasketball4">{<Basketball />}</div>
         <div class="logintitle">
           {" "}
           <div> Welcome to the Basketball</div>
@@ -80,21 +81,47 @@ function MainPage() {
   }
 
   function RightMenu() {
-    return (
-      <div class="rightmenu ">
-        {" "}
-        <button>Blog Posts</button>
-        <button>Game BreakDown</button>
-        <button>About us</button>
-        <button>Contact us</button>
-        <button>News</button>
-        <button>Subscriptions</button>
-        <button>Options</button>
-        <button>FAQ</button>
-        <button>My account</button>
-        <button>Log out</button>
-      </div>
-    );
+    if (page !== "loginpage")
+      return (
+        <div
+          style={{
+            backgroundColor: "#e6e6e6",
+            //  height: 140,
+          }}
+          class="rightmenu "
+        >
+          {" "}
+          <button
+            onClick={() => {
+              setpage("gamebreakdown");
+            }}
+          >
+            Game BreakDown
+          </button>
+          <button
+            onClick={() => {
+              setpage("yearlyreport");
+            }}
+          >
+            Yearly Reporter
+          </button>
+          <button
+            onClick={() => {
+              setpage("addaccounts");
+            }}
+          >
+            Manage Accounts
+          </button>
+          <button>About us</button>
+          <button>Contact us</button>
+          <button>News</button>
+          <button>Subscriptions</button>
+          <button>Options</button>
+          <button>FAQ</button>
+          <button>My account</button>
+          <button>Log out</button>
+        </div>
+      );
   }
 
   function ConditionalPage() {
@@ -111,12 +138,32 @@ function MainPage() {
           <App user1={username} password1={password} />{" "}
         </div>
       );
+    } else if (page == "yearlyreport") {
+      return (
+        <div>
+          {" "}
+          <YearlyReporter1 user1={username} password1={password} />{" "}
+        </div>
+      );
+    } else if (page == "addaccounts") {
+      return (
+        <div>
+          {" "}
+          <AccountManager1 user1={username} password1={password} />{" "}
+        </div>
+      );
     }
   }
 
   return (
     <div>
       {" "}
+      <div class="superlargetext0">Basketball Stats</div>{" "}
+      <div style={{ height: 140 }}>
+        {" "}
+        <div class="scaledbasketball1">{<Basketball />}</div>{" "}
+      </div>
+      <RightMenu />
       <ConditionalPage />{" "}
     </div>
   );

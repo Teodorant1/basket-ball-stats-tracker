@@ -14,6 +14,10 @@
   }
 }
 
+#lineupbox{
+  left: 10cm;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -114,6 +118,7 @@ top: 30%;
 
 
 .scaledbasketball4 {
+  background-color: #e6e6e6;
   position:absolute;
   left: 70px;
   width: 425px;
