@@ -22,7 +22,7 @@ function AccountManager1({ user1, password1 }) {
       "}";
 
     axios
-      .post("http://144.202.69.49:8005", fetchpayload)
+      .post("http://104.238.158.102:8005", fetchpayload)
       .then((resp) => {
         const receivedinfo = resp.data;
         console.log(receivedinfo);
