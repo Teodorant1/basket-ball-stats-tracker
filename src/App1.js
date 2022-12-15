@@ -126,20 +126,19 @@ function App({ user1, password1 }) {
   const [stage, setstage] = useState(0);
 
   const [show, setshow] = useState(-10);
-  const [xaxis, setxaxis] = useState(0);
-  const [yaxis, setyaxis] = useState(0);
+  const [xaxis, setxaxis] = useState(window.innerHeight);
+  const [yaxis, setyaxis] = useState(window.innerWidth);
   const [gameID, setgameID] = useState("00000");
 
   function getRefactoredQuadrants(QuarterNumber, teamID) {
     const fetchpayload =
-      "{ method:getslice" +
-      ",username:" +
+      "{ method:getslice,username:" +
       username +
       ",password:" +
       password +
-      ", teamID:" +
+      ",teamID:" +
       teamID +
-      ", QuarterNumber:" +
+      ",QuarterNumber:" +
       QuarterNumber +
       "}";
 
@@ -171,122 +170,70 @@ function App({ user1, password1 }) {
           <div>
             {" "}
             <button
-              class="roundbutton1"
               style={{
-                backgroundColor: "#9dd045",
-                color: "white",
+                backgroundColor: "#cccccc",
                 height: "45px",
                 width: "125px",
+              }}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                getRefactoredQuadrants(1, 2);
               }}
               onClick={() => {
                 getRefactoredQuadrants(1, 1);
               }}
             >
-              Q1
+              1
             </button>
             <button
-              class="roundbutton1"
               style={{
-                backgroundColor: "#9dd045",
-                color: "white",
+                backgroundColor: "#cccccc",
                 height: "45px",
                 width: "125px",
+              }}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                getRefactoredQuadrants(2, 2);
               }}
               onClick={() => {
                 getRefactoredQuadrants(2, 1);
               }}
             >
-              Q2
+              2
             </button>
             <button
-              class="roundbutton1"
               style={{
-                backgroundColor: "#9dd045",
-                color: "white",
+                backgroundColor: "#cccccc",
                 height: "45px",
                 width: "125px",
+              }}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                getRefactoredQuadrants(3, 2);
               }}
               onClick={() => {
                 getRefactoredQuadrants(3, 1);
               }}
             >
-              Q3
+              3
             </button>
             <button
-              class="roundbutton1"
               style={{
-                backgroundColor: "#9dd045",
-                color: "white",
+                backgroundColor: "#cccccc",
                 height: "45px",
                 width: "125px",
+              }}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                getRefactoredQuadrants(4, 2);
               }}
               onClick={() => {
                 getRefactoredQuadrants(4, 1);
               }}
             >
-              Q4
+              4
             </button>
           </div>
-        </div>
-
-        <div>
-          {" "}
-          <button
-            class="roundbutton1"
-            style={{
-              backgroundColor: "#cccc",
-              color: "white",
-              height: "45px",
-              width: "125px",
-            }}
-            onClick={() => {
-              getRefactoredQuadrants(1, 2);
-            }}
-          >
-            Q1
-          </button>
-          <button
-            class="roundbutton1"
-            style={{
-              backgroundColor: "#cccc",
-              color: "white",
-              height: "45px",
-              width: "125px",
-            }}
-            onClick={() => {
-              getRefactoredQuadrants(2, 2);
-            }}
-          >
-            Q2
-          </button>
-          <button
-            class="roundbutton1"
-            style={{
-              backgroundColor: "#cccc",
-              color: "white",
-              height: "45px",
-              width: "125px",
-            }}
-            onClick={() => {
-              getRefactoredQuadrants(3, 2);
-            }}
-          >
-            Q3
-          </button>
-          <button
-            class="roundbutton1"
-            style={{
-              backgroundColor: "#cccc",
-              color: "white",
-              height: "45px",
-              width: "125px",
-            }}
-            onClick={() => {
-              getRefactoredQuadrants(4, 2);
-            }}
-          >
-            Q4
-          </button>
         </div>
       </div>
     );
@@ -308,12 +255,11 @@ function App({ user1, password1 }) {
           onClick={(event) => {
             event.preventDefault();
             toggleQuadrants();
-            setyaxis(event.pageY - 160);
+            setyaxis(event.pageY + 30);
             setxaxis(event.pageX - 35);
           }}
           style={{
-            backgroundColor: "#9dd045",
-            color: "white",
+            backgroundColor: "#cccc",
             height: "65px",
             width: "155px",
           }}
@@ -517,8 +463,6 @@ function App({ user1, password1 }) {
     ));
     return (
       <div class="slicedarray">
-        <div></div>
-        <QuadrantPicker />
         <div
           class="greybox"
           id="slicearray"
@@ -613,7 +557,8 @@ function App({ user1, password1 }) {
     return (
       <div style={{ backgroundColor: "#e6e6e6" }}>
         {" "}
-        <SliceArray props1={quadrant.timeline} />
+        <div></div>
+        <QuadrantPicker /> <SliceArray props1={quadrant.timeline} />
       </div>
     );
   }
@@ -657,7 +602,6 @@ function App({ user1, password1 }) {
       }}
       className="App"
     >
-      {" "}
       <div style={{ backgroundColor: "#e6e6e6" }} class="flex-container ">
         {" "}
         <ShowTeamsBreakdown />
