@@ -1109,7 +1109,7 @@ function YearlyReporter1({ user1, password1 }) {
     //setreport(pages.at(page.pageindex - 1).contents);
 
     axios
-      .post("http://80.240.21.17:8006", fetchpayload)
+      .post("http://144.202.69.49:8006", fetchpayload)
       .then((resp) => {
         const receivedinfo = resp.data;
         //  console.log(receivedinfo);

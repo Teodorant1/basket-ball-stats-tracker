@@ -143,7 +143,7 @@ function App({ user1, password1 }) {
       "}";
 
     axios
-      .post("http://80.240.21.17:8002", fetchpayload)
+      .post("http://144.202.69.49:8002", fetchpayload)
       .then((resp) => {
         const receivedinfo = resp.data;
         setquadrant(receivedinfo);
@@ -511,7 +511,7 @@ function App({ user1, password1 }) {
       "}";
 
     axios
-      .post("http://80.240.21.17:8004", parcela1)
+      .post("http://144.202.69.49:8004", parcela1)
       .then((resp) => {
         const receivedinfo = resp.data;
         console.log(receivedinfo);

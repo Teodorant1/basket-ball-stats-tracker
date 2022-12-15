@@ -24,7 +24,7 @@ function MainPage() {
     const parcela1 = "{username:" + username1 + ",password:" + password1 + "}";
 
     axios
-      .post("http://80.240.21.17:8003", parcela1)
+      .post("http://144.202.69.49:8003", parcela1)
       .then((resp) => {
         const receivedinfo = resp.data;
         setpage(receivedinfo);
