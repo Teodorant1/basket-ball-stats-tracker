@@ -1,3 +1,5 @@
+##This is the frontend for a basketball stats calculator backend that you can find here https://github.com/Teodorant1/sportETstats
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
